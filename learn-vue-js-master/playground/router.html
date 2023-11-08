@@ -8,9 +8,11 @@
 <body>
     <div id="app">
         <div>
+            <!-- a태그와 동일 라우팅 시켜주는 링크 -->
             <router-link to="/login">Login</router-link>
             <router-link to="/main">Main</router-link>
         </div>
+        <!-- 라우팅 된 컴포넌트가 위치할 자리를 잡아줌 -->
         <router-view></router-view>
     </div>
 
@@ -24,8 +26,10 @@
         var MainComponent = {
             template: '<div>main</div>'
         }
+        // 라우터 인스턴스 생성
         var router = new VueRouter({
             // 페이지의 라우팅 정보(어떤 url로 이동했을 때 어떤 페이지가 뿌려질 지에 대한 정보)가 배열로 들어감
+            // 라우터들을 담는 route 속성 안에는 배열
             // 배열 안에는 페이지의 정보가 들어가고 원소의 개수는 페이지의 갯수를 의미한다.
             routes: [
                 // 로그인 페이지 정보
@@ -46,6 +50,7 @@
             
         });
 
+        // 뷰 인스턴스에 라우터를 등록한다.
         new Vue({
             el: '#app',
             router: router  
