@@ -22,8 +22,10 @@
             data: {
                 isError: false
             },
+            // 값을 추적하여 간단한 연산을 한다. 
             computed: {
                 errorCheck: function() {
+                    // computed에서 데이터를 가져오려면 this를 붙여야한다.
                    return this.isError ? 'warning' : null;
                 }
             }
