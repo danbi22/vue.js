@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Mustache Tag는 가장 기본적인 데이터 바인딩 방식으로
+            뷰 인스턴스에서 정의한 속성들을 화면에 표시하는 방법입니다.
+        -->
+        {{ str }}
+        <!-- v-bind 연결하여 변경사항과 함께 관리한다는 의미이다.
+        id속성을 묶어서 뷰 인스턴스에서 관리한다. -->
+        <p v-bind:id="uuid" v-bind:class="name">{{num}}</p>
+        <p>{{doubleNum}}</p>
+        <!-- true일 때 그려주고 false일 때 없어진다 -->
+        <div v-if="loading">
+            Loading...
+        </div>
+        <!-- false일 때 그려주고 true일 때 없어진다 -->
+        <div v-else>
+            test user has been logged in
+        </div>
+        <!-- v-show 값이 true일 때는 보여주고 false일 때는 d-none 속성을 부여한다. -->
+        <div v-show="loading">
+            Loading...
+        </div>
+        <!-- TODO: 인풋 박스를 만들고 입력된 값을 p 태그에 출력해보세요 -->
+        <!-- v-model input의 값을 뷰 인스턴스 데이터 속성으로 관리한다 -->
+        <input type="text" v-model="message">
+        <p>{{ message }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                str: 'hi',
+                num: 10,
+                uuid: 'abc1234',
+                name: 'text-blue',
+                loading: true,
+                message: ''
+            },
+            // computed는 뷰 인스턴스의 속성을 연결시키고 속성이 바뀌면 그에 맞게
+            // 같이 계산되는 특징을 가지고 있습니다.
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
