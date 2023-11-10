@@ -4,7 +4,7 @@
         <!-- v-for를 사용할 때 :key="키값"을 넣어주어야한다. Vue.js의 최적화 기법 -->
         <!-- v-for="(텍스트 값, 인덱스) in 뽑아올 객체나 자료구조 " :key="텍스트 값" 
             인덱스는 v-for에서 제공하는 변수 내부적으로 인덱스를 부여한다.-->
-        <li v-for="(todoItem, index) in todoItems" :key="todoItem" class="shadow">
+        <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
             <!-- i태그는 아이콘을 넣을 때 사용 -->
             <i class="checkBtn fa fa-check" aria-hidden="true"></i>
             {{ todoItem }}
@@ -21,31 +21,15 @@
 <script>
 export default {
     props: ['propsdata'],
-    data() {
-        return {
-            todoItems: []
-        }
-    },
     // data와 methods 속성이 정의되었기 때문에 데이터(todoItems)에 접근 할 수 있다.
-    created() {
-        // localStorage의 크기가 0보다 크다면 실행(데이터가 존재하면 실행)
-        // localStorage는 한 번에 저장된 아이템을 불러오는 API가 없기 때문에 하나씩 반복문을 돌려가며 넣어줘야한다.
-        if (localStorage.length > 0) {
-            // 크기만큼 반복 key로 0번부터 총 개수의 -1개까지 반복
-            for (var i = 0; i < localStorage.length; i++) {
-                // 인스턴스에 배열로 선언한 todoItems에 localStorage에서 key값으로 찾은 값을 넣어준다.
-                // JavaScript의 배열에 넣을 때는 push()를 사용한다.
-                this.todoItems.push(localStorage.key(i));
-            }
-        }
-    },
     methods: {
         removeTodo(todoItem, index) {
-            // localStorage.removeItem()는 로컬스토리지의 데이터를 삭제하는 메서드
-            localStorage.removeItem(todoItem);
-            // splice() : 배열의 특정 인덱스에서 부여한 숫자만큼의 인덱스를 삭제. 해당 배열을 깊은복사하여 값을 변경
-            // slice()와 혼동하면 안됨 slice는 새로운 배열을 반환하기 때문에 Reactivity 적용이 되지 않음.
-            this.todoItems.splice(index, 1);
+            this.$emit('removeTodo', todoItem, index);
+            // // localStorage.removeItem()는 로컬스토리지의 데이터를 삭제하는 메서드
+            // localStorage.removeItem(todoItem);
+            // // splice() : 배열의 특정 인덱스에서 부여한 숫자만큼의 인덱스를 삭제. 해당 배열을 깊은복사하여 값을 변경
+            // // slice()와 혼동하면 안됨 slice는 새로운 배열을 반환하기 때문에 Reactivity 적용이 되지 않음.
+            // this.todoItems.splice(index, 1);
         }
     }
 }
