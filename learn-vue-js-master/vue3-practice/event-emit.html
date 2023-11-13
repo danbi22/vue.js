@@ -1,0 +1,43 @@
+<div id="app">
+  <app-contents v-on:refresh="getMessage"></app-contents>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  const appContent = {
+    template: `
+      <p>{{ message }}</p>
+      <button v-on:click="sendMessage">send</button>
+    `,
+    data() {
+      return {
+        message: 'hi'
+      }
+    },
+    methods: {
+      sendMessage() {
+        console.log('sendMessage()');
+        this.$emit('refresh', this.message);
+      }
+    }
+  }
+
+  Vue.createApp({
+    components: {
+      'app-contents': appContent
+    },
+    methods: {
+      getMessage(value) {
+        console.log('getMessage()');
+        alert('새로고침');
+        console.log(value);
+        this.str = value;
+      }
+    },
+    data() {
+      return {
+        str: ''
+      }
+    }
+  }).mount('#app');
+</script>

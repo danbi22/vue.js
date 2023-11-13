@@ -1,0 +1,43 @@
+<div id="app">
+  <app-header v-bind:propsdata="loginStatus"></app-header>
+  <app-contents v-on:send="login"></app-contents>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  const appContents = {
+    template: '<button v-on:click="btnLogin">login</button>',
+    methods: {
+      btnLogin() {
+        console.log('btnLogin()');
+        this.$emit('send');
+      }
+    }
+  }
+    
+  const appHeader = {
+    template: `
+      <p v-if="propsdata">로그인 되었습니다.</p>
+      <p v-else>로그인 하세요.</p>
+    `,
+    props: ['propsdata']
+  }
+
+  Vue.createApp({
+    components: {
+      'app-contents': appContents,
+      'app-header': appHeader
+    },
+    data() {
+      return {
+        loginStatus: false
+      }
+    },
+    methods: {
+      login() {
+        console.log('login()');
+        this.loginStatus = true;
+      }
+    },
+  }).mount('#app');
+</script>
