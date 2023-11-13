@@ -18,7 +18,7 @@
   </section>
 </template>
 
-<script>
+<script> 
 export default {
     props: ['propsdata'],
     // data와 methods 속성이 정의되었기 때문에 데이터(todoItems)에 접근 할 수 있다.
