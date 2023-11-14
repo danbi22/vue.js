@@ -18,8 +18,19 @@
 
   export default {
     setup() {
-      const username = ref('');
+      // data()
+      const userId = ref('');
       const password = ref('');
+
+      // methods:
+      const submitForm = () => {
+        axois.post('https://jsonplaceholder.typicode.com/users/', {
+          userId: userId.value,
+          password: password.value
+        })
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error));
+      }
     }
     // data() {
     //   return {
