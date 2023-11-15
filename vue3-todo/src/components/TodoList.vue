@@ -1,9 +1,11 @@
 <template>
   <ul>
     <li v-for="(item, index) in todoList" :key="item" class="shadow">
-      <i class="checkBtn fas fa-check" @click="toggleComplete(item)"></i>
-      {{ item.name }}
-      <span class="removeBtn" @click="removeItem(item, index)">
+      <i class="checkBtn fas fa-check" :class="{checkBtnCompleted: item.completed}" @click="toggleComplete(item)"></i>
+      <span :class="{textCompleted: item.completed}">
+        {{ item.name }}
+      </span>
+      <span class="removeBtn"  @click="removeItem(item, index)">
         <i class="removeBtn fas fa-trash-alt"></i>
       </span>
     </li>
@@ -18,8 +20,10 @@
         this.$emit('removeItem', item, index);
       },
       toggleComplete(item, index) {
+        console.log(item.completed);
         item.completed = !item.completed;
         this.$emit('changeCompleted', item, index);
+        console.log(item.completed);
       }
     },
   }
