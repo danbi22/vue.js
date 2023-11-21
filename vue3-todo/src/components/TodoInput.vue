@@ -4,14 +4,25 @@
     <span class="addContainer" @click="addTodo">
       <i class="addBtn fas fa-plus" aria-hidden="true"></i>
     </span>
+    <AlertModal v-if="showModal" @close="showModal = false">
+        <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+      <template v-slot:header>경고</template>
+      <template v-slot:body>할 일의 이름을 입력해주세요.</template>
+    </AlertModal>
   </div>
 </template>
 
 <script>
+  import AlertModal from './common/AlertModal.vue'
+
   export default {
     data() {
       return {
-        todoItem: ''
+        todoItem: '',
+        showModal: false
       }
     },
     methods: {
@@ -20,11 +31,16 @@
           this.$emit('addItem', this.todoItem);
           console.log(this.todoItem);
           this.clearInput();
+        } else {
+          this.showModal = !this.showModal;
         }
       },
       clearInput() {
         this.todoItem = '';
       }
+    },
+    components: {
+      AlertModal
     }
   }
 </script>
